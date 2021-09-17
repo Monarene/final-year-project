@@ -237,7 +237,7 @@ set    type 3 type/fraction 4 0.50 12358
 pair_style    hybrid vashishta meam/c eam/alloy #coul/streitz 12.0 wolf 0.31 eam/fs tersoff 
 #pair_coeff    * * tersoff SiO.tersoff NULL Si O O
 pair_coeff    * * eam/alloy AlO.eam.alloy Al NULL O O
-pair_coeff	* * meam/c Jelinek_2012_meamf Al Si Mg Cu Fe Jelinek_2012_meam.alsimgcufe Al Si NULL NULL
+pair_coeff	* * meam/c Jelinek_2012_meamf AlS SiS MgS CuS FeS Jelinek_2012_meam.alsimgcufe AlS SiS NULL NULL
 pair_coeff    * * vashishta SiO.1997.vashishta NULL Si O O
 #pair_coeff    * * coul/streitz AlO.streitz Al NULL O O
 #pair_coeff    * * eam/fs Al_mm.eam.fs Al NULL NULL NULL
