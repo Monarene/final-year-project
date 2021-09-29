@@ -1,0 +1,39 @@
+LAMMPS (29 Oct 2020)
+######################################
+# LAMMPS INPUT SCRIPT
+# Find minimum energy fcc (face-centered cubic) atomic configuration
+# Mark Tschopp
+# Syntax, lmp_exe < calc_fcc.in
+
+######################################
+# INITIALIZATION
+clear
+units metal
+dimension 3
+boundary p p p
+atom_style atomic
+atom_modify map array
+
+######################################
+# ATOM DEFINITION
+lattice fcc 4 orient x 1 1 0 orient y -1 1 0 orient z 0 0 1
+Lattice spacing in x,y,z = 5.6568542 5.6568542 4.0000000
+region box block 0 1 0 1 0 1 units lattice
+create_box 1 box
+Created orthogonal box = (0.0000000 0.0000000 0.0000000) to (5.6568542 5.6568542 4.0000000)
+  1 by 1 by 1 MPI processor grid
+create_atoms 1 box
+Created 8 atoms
+  create_atoms CPU = 0.000 seconds
+replicate 1 1 1
+Replicating atoms ...
+  orthogonal box = (0.0000000 0.0000000 0.0000000) to (5.6568542 5.6568542 4.0000000)
+  1 by 1 by 1 MPI processor grid
+  8 atoms
+  replicate CPU = 0.000 seconds
+
+######################################
+# DEFINE INTERATOMIC POTENTIAL
+pair_style eam/alloy
+pair_coeff * * Al99.eam.alloy Al
+ERROR on proc 0: cannot open eam/alloy potential file Al99.eam.alloy (../potential_file_reader.cpp:62)

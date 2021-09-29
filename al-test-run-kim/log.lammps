@@ -8,6 +8,6 @@ LAMMPS (29 Oct 2020)
 ######################################
 # INITIALIZATION
 clear
-kim          init Sim_LAMMPS_MEAM_PascuetFernandez_2015_Al__SM_811588957187_000 metal
-ERROR: Unknown command: kim          init Sim_LAMMPS_MEAM_PascuetFernandez_2015_Al__SM_811588957187_000 metal (../input.cpp:264)
-Last command: kim          init Sim_LAMMPS_MEAM_PascuetFernandez_2015_Al__SM_811588957187_000 metal
+kim init LJ_ElliottAkerson_2015_Universal__MO_959249795837_003 metal
+ERROR: Unknown command: kim init LJ_ElliottAkerson_2015_Universal__MO_959249795837_003 metal (../input.cpp:264)
+Last command: kim init LJ_ElliottAkerson_2015_Universal__MO_959249795837_003 metal

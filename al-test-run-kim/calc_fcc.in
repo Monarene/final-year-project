@@ -24,8 +24,9 @@ replicate 1 1 1
 ######################################
 # DEFINE INTERATOMIC POTENTIAL
 kim interactions Al
-neighbor 2.0 bin 
-neigh_modify delay 10 check yes 
+mass 1 26.98
+neighbor 0.3 bin 
+neigh_modify one 10000
  
 ######################################
 # DEFINE COMPUTES 

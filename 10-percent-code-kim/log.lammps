@@ -1,0 +1,501 @@
+LAMMPS (29 Oct 2020)
+units    metal
+echo       both
+atom_style    atomic
+dimension    3
+boundary     p p p
+
+region     box block 0.0 50.0 0 100.0 0 50.0  units box
+create_box    4 box
+Created orthogonal box = (0.0000000 0.0000000 0.0000000) to (50.000000 100.00000 50.000000)
+  1 by 1 by 1 MPI processor grid
+lattice        fcc 4.05
+Lattice spacing in x,y,z = 4.0500000 4.0500000 4.0500000
+region     Al block 0.0 50.0 0.0 100.0 0.0 50.0 units box
+create_atoms     1 region Al units box
+Created 15625 atoms
+  create_atoms CPU = 0.002 seconds
+group    matrix region Al
+15625 atoms in group matrix
+variable   radius equal 5.5
+region     RHA1 sphere 8 12 8 ${radius} units box
+region     RHA1 sphere 8 12 8 5.5 units box
+region     RHA2 sphere 8 31 8 ${radius} units box
+region     RHA2 sphere 8 31 8 5.5 units box
+region     RHA3 sphere 8 64 8 ${radius} units box
+region     RHA3 sphere 8 64 8 5.5 units box
+region     RHA4 sphere 8 90 8 ${radius} units box
+region     RHA4 sphere 8 90 8 5.5 units box
+region     RHA5 sphere 8 12 25 ${radius} units box
+region     RHA5 sphere 8 12 25 5.5 units box
+region     RHA6 sphere 8 31 25 ${radius} units box
+region     RHA6 sphere 8 31 25 5.5 units box
+region     RHA7 sphere 8 64 25 ${radius} units box
+region     RHA7 sphere 8 64 25 5.5 units box
+region     RHA8 sphere 8 90 25 ${radius} units box
+region     RHA8 sphere 8 90 25 5.5 units box
+region     RHA9 sphere 8 12 42 ${radius} units box
+region     RHA9 sphere 8 12 42 5.5 units box
+region     RHA10 sphere 8 38 42 ${radius} units box
+region     RHA10 sphere 8 38 42 5.5 units box
+region     RHA11 sphere 8 64 42 ${radius} units box
+region     RHA11 sphere 8 64 42 5.5 units box
+region     RHA12 sphere 8 90 42 ${radius} units box
+region     RHA12 sphere 8 90 42 5.5 units box
+region     RHA13 sphere 25 12 8 ${radius} units box
+region     RHA13 sphere 25 12 8 5.5 units box
+region     RHA14 sphere 25 38 8 ${radius} units box
+region     RHA14 sphere 25 38 8 5.5 units box
+region     RHA15 sphere 25 64 8 ${radius} units box
+region     RHA15 sphere 25 64 8 5.5 units box
+region     RHA16 sphere 25 90 8 ${radius} units box
+region     RHA16 sphere 25 90 8 5.5 units box
+region     RHA17 sphere 25 12 25 ${radius} units box
+region     RHA17 sphere 25 12 25 5.5 units box
+region     RHA18 sphere 25 38 25 ${radius} units box
+region     RHA18 sphere 25 38 25 5.5 units box
+region     RHA19 sphere 25 64 25 ${radius} units box
+region     RHA19 sphere 25 64 25 5.5 units box
+region     RHA20 sphere 25 90 25 ${radius} units box
+region     RHA20 sphere 25 90 25 5.5 units box
+region     RHA21 sphere 25 12 42 ${radius} units box
+region     RHA21 sphere 25 12 42 5.5 units box
+region     RHA22 sphere 25 38 42 ${radius} units box
+region     RHA22 sphere 25 38 42 5.5 units box
+region     RHA23 sphere 25 64 42 ${radius} units box
+region     RHA23 sphere 25 64 42 5.5 units box
+region     RHA24 sphere 25 90 42 ${radius} units box
+region     RHA24 sphere 25 90 42 5.5 units box
+region     RHA25 sphere 42 12 8 ${radius} units box
+region     RHA25 sphere 42 12 8 5.5 units box
+region     RHA26 sphere 42 38 8 ${radius} units box
+region     RHA26 sphere 42 38 8 5.5 units box
+region     RHA27 sphere 42 64 8 ${radius} units box
+region     RHA27 sphere 42 64 8 5.5 units box
+region     RHA28 sphere 42 90 8 ${radius} units box
+region     RHA28 sphere 42 90 8 5.5 units box
+region     RHA29 sphere 42 12 25 ${radius} units box
+region     RHA29 sphere 42 12 25 5.5 units box
+region     RHA30 sphere 42 38 25 ${radius} units box
+region     RHA30 sphere 42 38 25 5.5 units box
+region     RHA31 sphere 42 64 25 ${radius} units box
+region     RHA31 sphere 42 64 25 5.5 units box
+region     RHA32 sphere 42 90 25 ${radius} units box
+region     RHA32 sphere 42 90 25 5.5 units box
+region     RHA33 sphere 42 12 42 ${radius} units box
+region     RHA33 sphere 42 12 42 5.5 units box
+region     RHA34 sphere 42 38 42 ${radius} units box
+region     RHA34 sphere 42 38 42 5.5 units box
+region     RHA35 sphere 42 64 42 ${radius} units box
+region     RHA35 sphere 42 64 42 5.5 units box
+region     RHA36 sphere 42 90 42 ${radius} units box
+region     RHA36 sphere 42 90 42 5.5 units box
+delete_atoms    region RHA1
+Deleted 43 atoms, new total = 15582
+delete_atoms    region RHA2
+Deleted 39 atoms, new total = 15543
+delete_atoms    region RHA3
+Deleted 43 atoms, new total = 15500
+delete_atoms    region RHA4
+Deleted 41 atoms, new total = 15459
+delete_atoms    region RHA5
+Deleted 44 atoms, new total = 15415
+delete_atoms    region RHA6
+Deleted 44 atoms, new total = 15371
+delete_atoms    region RHA7
+Deleted 43 atoms, new total = 15328
+delete_atoms    region RHA8
+Deleted 43 atoms, new total = 15285
+delete_atoms    region RHA9
+Deleted 38 atoms, new total = 15247
+delete_atoms    region RHA10
+Deleted 43 atoms, new total = 15204
+delete_atoms    region RHA11
+Deleted 44 atoms, new total = 15160
+delete_atoms    region RHA12
+Deleted 43 atoms, new total = 15117
+delete_atoms    region RHA13
+Deleted 44 atoms, new total = 15073
+delete_atoms    region RHA14
+Deleted 43 atoms, new total = 15030
+delete_atoms    region RHA15
+Deleted 43 atoms, new total = 14987
+delete_atoms    region RHA16
+Deleted 43 atoms, new total = 14944
+delete_atoms    region RHA17
+Deleted 43 atoms, new total = 14901
+delete_atoms    region RHA18
+Deleted 44 atoms, new total = 14857
+delete_atoms    region RHA19
+Deleted 39 atoms, new total = 14818
+delete_atoms    region RHA20
+Deleted 39 atoms, new total = 14779
+delete_atoms    region RHA21
+Deleted 43 atoms, new total = 14736
+delete_atoms    region RHA22
+Deleted 40 atoms, new total = 14696
+delete_atoms    region RHA23
+Deleted 41 atoms, new total = 14655
+delete_atoms    region RHA24
+Deleted 42 atoms, new total = 14613
+delete_atoms    region RHA25
+Deleted 38 atoms, new total = 14575
+delete_atoms    region RHA26
+Deleted 43 atoms, new total = 14532
+delete_atoms    region RHA27
+Deleted 44 atoms, new total = 14488
+delete_atoms    region RHA28
+Deleted 43 atoms, new total = 14445
+delete_atoms    region RHA29
+Deleted 43 atoms, new total = 14402
+delete_atoms    region RHA30
+Deleted 40 atoms, new total = 14362
+delete_atoms    region RHA31
+Deleted 41 atoms, new total = 14321
+delete_atoms    region RHA32
+Deleted 42 atoms, new total = 14279
+delete_atoms    region RHA33
+Deleted 41 atoms, new total = 14238
+delete_atoms    region RHA34
+Deleted 41 atoms, new total = 14197
+delete_atoms    region RHA35
+Deleted 39 atoms, new total = 14158
+delete_atoms    region RHA36
+Deleted 41 atoms, new total = 14117
+
+#New Lattice for RHA
+lattice         diamond 5.4
+Lattice spacing in x,y,z = 5.4000000 5.4000000 5.4000000
+
+create_atoms 2 region RHA1 units box
+Created 34 atoms
+  create_atoms CPU = 0.000 seconds
+group    clu1 region RHA1
+34 atoms in group clu1
+set    region RHA1 type/fraction 3 0.66 12358
+Setting atom values ...
+  20 settings made for type/fraction
+
+create_atoms 2 region RHA2 units box
+Created 35 atoms
+  create_atoms CPU = 0.000 seconds
+group    clu2 region RHA2
+35 atoms in group clu2
+set    region RHA2 type/fraction 3 0.66 12358
+Setting atom values ...
+  25 settings made for type/fraction
+
+create_atoms    2 region RHA3 units box
+Created 36 atoms
+  create_atoms CPU = 0.000 seconds
+group    clu3 region RHA3
+36 atoms in group clu3
+set    region RHA3 type/fraction 3 0.66 12358
+Setting atom values ...
+  22 settings made for type/fraction
+
+create_atoms    2 region RHA4 units box
+Created 38 atoms
+  create_atoms CPU = 0.000 seconds
+group      clu4 region RHA4
+38 atoms in group clu4
+set    region RHA4 type/fraction 3 0.66 12358
+Setting atom values ...
+  24 settings made for type/fraction
+
+create_atoms     2 region RHA5 units box
+Created 36 atoms
+  create_atoms CPU = 0.000 seconds
+group      clu5 region RHA5
+36 atoms in group clu5
+set      region RHA5 type/fraction 3 0.66 12358
+Setting atom values ...
+  22 settings made for type/fraction
+
+create_atoms      2 region RHA6 units box
+Created 34 atoms
+  create_atoms CPU = 0.000 seconds
+group     clu6 region RHA6
+34 atoms in group clu6
+set      region RHA6 type/fraction 3 0.66 12358
+Setting atom values ...
+  22 settings made for type/fraction
+
+create_atoms      2 region RHA7 units box
+Created 35 atoms
+  create_atoms CPU = 0.000 seconds
+group      clu7 region RHA7
+35 atoms in group clu7
+set      region RHA7 type/fraction 3 0.66 12358
+Setting atom values ...
+  20 settings made for type/fraction
+
+create_atoms      2 region RHA8 units box
+Created 35 atoms
+  create_atoms CPU = 0.000 seconds
+group     clu8 region RHA8
+35 atoms in group clu8
+set      region RHA8 type/fraction 3 0.66 12358
+Setting atom values ...
+  23 settings made for type/fraction
+
+create_atoms      2 region RHA9 units box
+Created 37 atoms
+  create_atoms CPU = 0.000 seconds
+group     clu9 region RHA9
+37 atoms in group clu9
+set     region RHA9 type/fraction 3 0.66 12358
+Setting atom values ...
+  29 settings made for type/fraction
+
+create_atoms      2 region RHA10 units box
+Created 35 atoms
+  create_atoms CPU = 0.000 seconds
+group    clu10 region RHA10
+35 atoms in group clu10
+set    region RHA10 type/fraction 3 0.66 12358
+Setting atom values ...
+  23 settings made for type/fraction
+
+create_atoms      2 region RHA11 units box
+Created 36 atoms
+  create_atoms CPU = 0.000 seconds
+group    clu11 region RHA11
+36 atoms in group clu11
+set    region RHA11 type/fraction 3 0.66 12358
+Setting atom values ...
+  22 settings made for type/fraction
+
+create_atoms      2 region RHA12 units box
+Created 35 atoms
+  create_atoms CPU = 0.000 seconds
+group    clu12 region RHA12
+35 atoms in group clu12
+set    region RHA12 type/fraction 3 0.66 12358
+Setting atom values ...
+  16 settings made for type/fraction
+
+create_atoms      2 region RHA13 units box
+Created 36 atoms
+  create_atoms CPU = 0.000 seconds
+group     clu13 region RHA13
+36 atoms in group clu13
+set     region RHA13 type/fraction 3 0.66 12358
+Setting atom values ...
+  24 settings made for type/fraction
+
+create_atoms      2 region RHA14 units box
+Created 35 atoms
+  create_atoms CPU = 0.000 seconds
+group    clu14 region RHA14
+35 atoms in group clu14
+set    region RHA14 type/fraction 3 0.66 12358
+Setting atom values ...
+  24 settings made for type/fraction
+
+create_atoms      2 region RHA15 units box
+Created 35 atoms
+  create_atoms CPU = 0.000 seconds
+group    clu15 region RHA15
+35 atoms in group clu15
+set    region RHA15 type/fraction 3 0.66 12358
+Setting atom values ...
+  26 settings made for type/fraction
+
+create_atoms      2 region RHA16 units box
+Created 35 atoms
+  create_atoms CPU = 0.000 seconds
+group    clu16 region RHA16
+35 atoms in group clu16
+set    region RHA16 type/fraction 3 0.66 12358
+Setting atom values ...
+  23 settings made for type/fraction
+
+create_atoms      2 region RHA17 units box
+Created 35 atoms
+  create_atoms CPU = 0.000 seconds
+group     clu17 region RHA17
+35 atoms in group clu17
+set     region RHA17 type/fraction 3 0.66 12358
+Setting atom values ...
+  15 settings made for type/fraction
+
+create_atoms      2 region RHA18 units box
+Created 35 atoms
+  create_atoms CPU = 0.000 seconds
+group    clu18 region RHA18
+35 atoms in group clu18
+set    region RHA18 type/fraction 3 0.66 12358
+Setting atom values ...
+  23 settings made for type/fraction
+
+create_atoms      2 region RHA19 units box
+Created 38 atoms
+  create_atoms CPU = 0.000 seconds
+group    clu19 region RHA19
+38 atoms in group clu19
+set    region RHA11 type/fraction 3 0.66 12358
+Setting atom values ...
+  22 settings made for type/fraction
+
+create_atoms      2 region RHA20 units box
+Created 38 atoms
+  create_atoms CPU = 0.000 seconds
+group    clu20 region RHA20
+38 atoms in group clu20
+set    region RHA12 type/fraction 3 0.66 12358
+Setting atom values ...
+  16 settings made for type/fraction
+
+create_atoms      2 region RHA21 units box
+Created 34 atoms
+  create_atoms CPU = 0.000 seconds
+group     clu21 region RHA21
+34 atoms in group clu21
+set     region RHA21 type/fraction 3 0.66 12358
+Setting atom values ...
+  21 settings made for type/fraction
+
+create_atoms      2 region RHA22 units box
+Created 36 atoms
+  create_atoms CPU = 0.000 seconds
+group    clu22 region RHA22
+36 atoms in group clu22
+set    region RHA22 type/fraction 3 0.66 12358
+Setting atom values ...
+  22 settings made for type/fraction
+
+create_atoms      2 region RHA23 units box
+Created 35 atoms
+  create_atoms CPU = 0.000 seconds
+group    clu23 region RHA23
+35 atoms in group clu23
+set    region RHA23 type/fraction 3 0.66 12358
+Setting atom values ...
+  24 settings made for type/fraction
+
+create_atoms      2 region RHA24 units box
+Created 36 atoms
+  create_atoms CPU = 0.000 seconds
+group    clu24 region RHA24
+36 atoms in group clu24
+set    region RHA24 type/fraction 3 0.66 12358
+Setting atom values ...
+  20 settings made for type/fraction
+
+create_atoms      2 region RHA25 units box
+Created 37 atoms
+  create_atoms CPU = 0.000 seconds
+group     clu25 region RHA25
+37 atoms in group clu25
+set     region RHA25 type/fraction 3 0.66 12358
+Setting atom values ...
+  23 settings made for type/fraction
+
+create_atoms      2 region RHA26 units box
+Created 35 atoms
+  create_atoms CPU = 0.000 seconds
+group    clu26 region RHA26
+35 atoms in group clu26
+set    region RHA26 type/fraction 3 0.66 12358
+Setting atom values ...
+  22 settings made for type/fraction
+
+create_atoms      2 region RHA27 units box
+Created 36 atoms
+  create_atoms CPU = 0.000 seconds
+group    clu27 region RHA27
+36 atoms in group clu27
+set    region RHA27 type/fraction 3 0.66 12358
+Setting atom values ...
+  25 settings made for type/fraction
+
+create_atoms      2 region RHA28 units box
+Created 35 atoms
+  create_atoms CPU = 0.000 seconds
+group    clu28 region RHA28
+35 atoms in group clu28
+set    region RHA28 type/fraction 3 0.66 12358
+Setting atom values ...
+  22 settings made for type/fraction
+
+create_atoms      2 region RHA29 units box
+Created 34 atoms
+  create_atoms CPU = 0.000 seconds
+group     clu29 region RHA29
+34 atoms in group clu29
+set     region RHA29 type/fraction 3 0.66 12358
+Setting atom values ...
+  22 settings made for type/fraction
+
+create_atoms      2 region RHA30 units box
+Created 36 atoms
+  create_atoms CPU = 0.000 seconds
+group    clu30 region RHA30
+36 atoms in group clu30
+set    region RHA30 type/fraction 3 0.66 12358
+Setting atom values ...
+  25 settings made for type/fraction
+
+create_atoms      2 region RHA31 units box
+Created 35 atoms
+  create_atoms CPU = 0.000 seconds
+group    clu30 region RHA31
+71 atoms in group clu30
+set    region RHA31 type/fraction 3 0.66 12358
+Setting atom values ...
+  26 settings made for type/fraction
+
+create_atoms      2 region RHA32 units box
+Created 36 atoms
+  create_atoms CPU = 0.000 seconds
+group    clu30 region RHA32
+107 atoms in group clu30
+set    region RHA32 type/fraction 3 0.66 12358
+Setting atom values ...
+  20 settings made for type/fraction
+
+create_atoms      2 region RHA33 units box
+Created 32 atoms
+  create_atoms CPU = 0.000 seconds
+group     clu30 region RHA33
+139 atoms in group clu30
+set     region RHA33 type/fraction 3 0.66 12358
+Setting atom values ...
+  24 settings made for type/fraction
+
+create_atoms      2 region RHA34 units box
+Created 35 atoms
+  create_atoms CPU = 0.000 seconds
+group    clu30 region RHA34
+174 atoms in group clu30
+set    region RHA34 type/fraction 3 0.66 12358
+Setting atom values ...
+  24 settings made for type/fraction
+
+create_atoms      2 region RHA35 units box
+Created 34 atoms
+  create_atoms CPU = 0.000 seconds
+group    clu30 region RHA35
+208 atoms in group clu30
+set    region RHA35 type/fraction 3 0.66 12358
+Setting atom values ...
+  21 settings made for type/fraction
+
+create_atoms      2 region RHA36 units box
+Created 30 atoms
+  create_atoms CPU = 0.000 seconds
+group    clu30 region RHA36
+238 atoms in group clu30
+set    region RHA36 type/fraction 3 0.66 12358
+Setting atom values ...
+  19 settings made for type/fraction
+
+
+set    type 3 type/fraction 4 0.50 12358
+Setting atom values ...
+  569 settings made for type/fraction
+
+pair_style    hybrid vashishta meam/c eam/alloy #coul/streitz 12.0 wolf 0.31 eam/fs tersoff
+ERROR: Unrecognized pair style 'meam/c' is part of the USER-MEAMC package which is not enabled in this LAMMPS binary. (../force.cpp:279)
+Last command: pair_style    hybrid vashishta meam/c eam/alloy #coul/streitz 12.0 wolf 0.31 eam/fs tersoff
