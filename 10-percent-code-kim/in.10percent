@@ -237,6 +237,9 @@ set    type 3 type/fraction 4 0.50 12358
 
 kim interactions Al Si O O
 mass 1 26.98
+mass 2 28.09
+mass 3 16.00
+mass 4 16.00
 neighbor 0.3 bin 
 neigh_modify one 10000
 

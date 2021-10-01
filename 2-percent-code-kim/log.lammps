@@ -1,0 +1,154 @@
+LAMMPS (29 Oct 2020)
+units    metal
+echo       both
+atom_style    atomic
+dimension    3
+boundary     p p p
+
+region     box block 0 50 0 100 0 50  units box
+create_box    4 box
+Created orthogonal box = (0.0000000 0.0000000 0.0000000) to (50.000000 100.00000 50.000000)
+  1 by 1 by 1 MPI processor grid
+lattice        fcc 4.05
+Lattice spacing in x,y,z = 4.0500000 4.0500000 4.0500000
+region     Al block 0 50 0 100 0 50 units box
+create_atoms     1 region Al units box
+Created 15625 atoms
+  create_atoms CPU = 0.002 seconds
+group    matrix region Al
+15625 atoms in group matrix
+variable   radius equal 5.5
+region     1 sphere 8 30 8 ${radius} units box
+region     1 sphere 8 30 8 5.5 units box
+region     2 sphere 8 70 8 ${radius} units box
+region     2 sphere 8 70 8 5.5 units box
+region     3 sphere 8 30 42 ${radius} units box
+region     3 sphere 8 30 42 5.5 units box
+region     4 sphere 8 70 42 ${radius} units box
+region     4 sphere 8 70 42 5.5 units box
+region     5 sphere 42 30 8 ${radius} units box
+region     5 sphere 42 30 8 5.5 units box
+region     6 sphere 42 70 8 ${radius} units box
+region     6 sphere 42 70 8 5.5 units box
+region     7 sphere 42 30 42 ${radius} units box
+region     7 sphere 42 30 42 5.5 units box
+region     8 sphere 42 70 42 ${radius} units box
+region     8 sphere 42 70 42 5.5 units box
+
+delete_atoms    region 1
+Deleted 38 atoms, new total = 15587
+delete_atoms    region 2
+Deleted 43 atoms, new total = 15544
+delete_atoms    region 3
+Deleted 44 atoms, new total = 15500
+delete_atoms    region 4
+Deleted 41 atoms, new total = 15459
+delete_atoms    region 5
+Deleted 44 atoms, new total = 15415
+delete_atoms    region 6
+Deleted 41 atoms, new total = 15374
+delete_atoms    region 7
+Deleted 41 atoms, new total = 15333
+delete_atoms    region 8
+Deleted 42 atoms, new total = 15291
+
+#New Lattice for Reinforcement
+lattice         diamond 5.4
+Lattice spacing in x,y,z = 5.4000000 5.4000000 5.4000000
+
+region     A1 sphere 8 30 8 ${radius} units box
+region     A1 sphere 8 30 8 5.5 units box
+region     A2 sphere 8 70 8 ${radius} units box
+region     A2 sphere 8 70 8 5.5 units box
+region     A3 sphere 8 30 42 ${radius} units box
+region     A3 sphere 8 30 42 5.5 units box
+region     A4 sphere 8 70 42 ${radius} units box
+region     A4 sphere 8 70 42 5.5 units box
+region     A5 sphere 42 30 8 ${radius} units box
+region     A5 sphere 42 30 8 5.5 units box
+region     A6 sphere 42 70 8 ${radius} units box
+region     A6 sphere 42 70 8 5.5 units box
+region     A7 sphere 42 30 42 ${radius} units box
+region     A7 sphere 42 30 42 5.5 units box
+region     A8 sphere 42 70 42 ${radius} units box
+region     A8 sphere 42 70 42 5.5 units box
+
+create_atoms 2 region 1 units box
+Created 30 atoms
+  create_atoms CPU = 0.000 seconds
+group    clu1 region 1
+30 atoms in group clu1
+set    region 1 type/fraction 3 0.66 12358
+Setting atom values ...
+  23 settings made for type/fraction
+
+create_atoms 2 region 2 units box
+Created 32 atoms
+  create_atoms CPU = 0.000 seconds
+group    clu2 region 2
+32 atoms in group clu2
+set    region 2 type/fraction 3 0.66 12358
+Setting atom values ...
+  23 settings made for type/fraction
+
+create_atoms    2 region 3 units box
+Created 37 atoms
+  create_atoms CPU = 0.000 seconds
+group    clu3 region 3
+37 atoms in group clu3
+set    region 3 type/fraction 3 0.66 12358
+Setting atom values ...
+  24 settings made for type/fraction
+
+create_atoms    2 region 4 units box
+Created 35 atoms
+  create_atoms CPU = 0.000 seconds
+group      clu4 region 4
+35 atoms in group clu4
+set    region 4 type/fraction 3 0.66 12358
+Setting atom values ...
+  23 settings made for type/fraction
+
+create_atoms     2 region 5 units box
+Created 37 atoms
+  create_atoms CPU = 0.000 seconds
+group      clu5 region 5
+37 atoms in group clu5
+set      region 5 type/fraction 3 0.66 12358
+Setting atom values ...
+  26 settings made for type/fraction
+
+create_atoms      2 region 6 units box
+Created 35 atoms
+  create_atoms CPU = 0.000 seconds
+group     clu6 region 6
+35 atoms in group clu6
+set      region 6 type/fraction 3 0.66 12358
+Setting atom values ...
+  21 settings made for type/fraction
+
+create_atoms      2 region 7 units box
+Created 37 atoms
+  create_atoms CPU = 0.000 seconds
+group      clu7 region 7
+37 atoms in group clu7
+set      region 7 type/fraction 3 0.66 12358
+Setting atom values ...
+  24 settings made for type/fraction
+
+create_atoms      2 region 8 units box
+Created 38 atoms
+  create_atoms CPU = 0.000 seconds
+group     clu8 region 8
+38 atoms in group clu8
+set      region 8 type/fraction 3 0.66 12358
+Setting atom values ...
+  26 settings made for type/fraction
+
+set    type 3 type/fraction 4 0.50 12358
+Setting atom values ...
+  141 settings made for type/fraction
+
+pair_style    hybrid vashishta meam/c eam/alloy #tersoff
+ERROR: Unrecognized pair style 'meam/c' is part of the USER-MEAMC package which is not enabled in this LAMMPS binary. (../force.cpp:279)
+Last command: pair_style    hybrid vashishta meam/c eam/alloy #tersoff

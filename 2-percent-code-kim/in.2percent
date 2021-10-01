@@ -1,0 +1,155 @@
+kim init LJ_ElliottAkerson_2015_Universal__MO_959249795837_003 metal
+echo       both
+atom_style    atomic
+dimension    3
+boundary     p p p
+
+region     box block 0 50 0 100 0 50  units box
+create_box    4 box
+lattice        fcc 4.05
+region     Al block 0 50 0 100 0 50 units box
+create_atoms     1 region Al units box
+group    matrix region Al
+variable   radius equal 5.5
+region     1 sphere 8 30 8 ${radius} units box
+region     2 sphere 8 70 8 ${radius} units box
+region     3 sphere 8 30 42 ${radius} units box
+region     4 sphere 8 70 42 ${radius} units box
+region     5 sphere 42 30 8 ${radius} units box
+region     6 sphere 42 70 8 ${radius} units box
+region     7 sphere 42 30 42 ${radius} units box
+region     8 sphere 42 70 42 ${radius} units box
+
+delete_atoms    region 1
+delete_atoms    region 2
+delete_atoms    region 3
+delete_atoms    region 4
+delete_atoms    region 5
+delete_atoms    region 6
+delete_atoms    region 7
+delete_atoms    region 8
+
+#New Lattice for Reinforcement
+lattice         diamond 5.4
+
+region     A1 sphere 8 30 8 ${radius} units box
+region     A2 sphere 8 70 8 ${radius} units box
+region     A3 sphere 8 30 42 ${radius} units box
+region     A4 sphere 8 70 42 ${radius} units box
+region     A5 sphere 42 30 8 ${radius} units box
+region     A6 sphere 42 70 8 ${radius} units box
+region     A7 sphere 42 30 42 ${radius} units box
+region     A8 sphere 42 70 42 ${radius} units box
+
+create_atoms 2 region 1 units box
+group    clu1 region 1 
+set    region 1 type/fraction 3 0.66 12358
+
+create_atoms 2 region 2 units box
+group    clu2 region 2 
+set    region 2 type/fraction 3 0.66 12358
+
+create_atoms    2 region 3 units box
+group    clu3 region 3 
+set    region 3 type/fraction 3 0.66 12358
+
+create_atoms    2 region 4 units box
+group      clu4 region 4 
+set    region 4 type/fraction 3 0.66 12358
+
+create_atoms     2 region 5 units box
+group      clu5 region 5
+set      region 5 type/fraction 3 0.66 12358
+
+create_atoms      2 region 6 units box
+group     clu6 region 6
+set      region 6 type/fraction 3 0.66 12358
+
+create_atoms      2 region 7 units box
+group      clu7 region 7
+set      region 7 type/fraction 3 0.66 12358
+
+create_atoms      2 region 8 units box
+group     clu8 region 8
+set      region 8 type/fraction 3 0.66 12358
+
+set    type 3 type/fraction 4 0.50 12358
+
+kim interactions Al Si O O
+mass 1 26.98
+mass 2 28.09
+mass 3 16.00
+mass 4 16.00
+neighbor 0.3 bin 
+neigh_modify one 10000
+
+#fix 6 all qeq/slater 1 12.0 1.0e-6 100 coul/streitz
+
+
+# Energy Minimization
+minimize    1.0e-10 1.0e-10 10000 10000
+compute    csym all centro/atom fcc
+compute    peratom all pe/atom 
+compute	   1 all stress/atom NULL
+
+
+# EQUILIBRATION
+reset_timestep 0
+timestep	0.001 			# 0.001 picoseconds = 10^-12 seconds = 1 femtosecond
+velocity    all create 300 873847 rot yes mom yes dist gaussian
+fix	   1 all nvt temp 300 300 $(100.0*dt)# iso 0 0 1
+
+#Set thermo output
+thermo     100
+thermo_style custom step temp vol press pe ke etotal #pxx pyy pzz
+#thermo_modify lost ignore
+
+
+run	10000
+unfix 	   1
+
+
+#Define Settings
+variable    tmp equal ly
+variable    lo equal ${tmp}
+variable    strain equal (ly-v_lo)/v_lo 
+variable  p1 equal "-pxx/10000"
+variable    p2 equal "-pyy/10000"
+variable    p3 equal "-pzz/10000"
+variable    p12 equal "-pxy/10000"
+
+variable     p23 equal "-pyz/10000"
+variable    p13 equal "-pxz/10000"
+variable    fm equal "(v_p2+v_p3+v_p1)/3" ##### Hydrostatic stress
+variable  fv  equal  "sqrt(((v_p2-v_p3)^2+(v_p3-v_p1)^2+(v_p1-v_p2)^2+6*(v_p12^2+v_p23^2+v_p13^2))/2)" ######Von Mises stress.
+variable       t equal "v_fm/v_fv"
+variable    fd equal (((v_p2-v_fm)*(v_p3-v_fm)*(v_p1-v_fm))-(v_p12)^2*(v_p3-v_fm)-(v_p13)^2*(v_p2-v_fm)-(v_p23)^2*(v_p1-v_fm)+2*v_p12*v_p23*v_p13)####Deviatoric  Von Mises stress
+# principal stresses
+variable    I1 equal "(v_p1+v_p2+v_p3)"
+variable         I2  equal  "((v_p1)*(v_p2))+((v_p2)*(v_p3))+((v_p1)*(v_p3)) -(v_p12)^2-(v_p23)^2-(v_p13)^2"
+variable     I3 equal "((v_p1)*(v_p2)*(v_p3))-((v_p1)*((v_p23)^2))-((v_p2)*((v_p13)^2))-((v_p3)*((v_p12)^2))+2*(v_p12)*(v_p23)*(v_p13)"
+variable       A  equal  "(acos(((2*(v_I1)^3)-9*(v_I1)*(v_I2)+27*(v_I3))/(2*((v_I1)^2-(3*(v_I2)))^(3/2))))/3" 
+variable    s1 equal "((v_I1)/3)+(2/3)*(sqrt((v_I1)^2-(3*(v_I2))))*cos(v_A)" 
+variable      s2 equal "((v_I1)/3)+(2/3)*(sqrt((v_I1)^2-(3*(v_I2))))*cos((v_A)+(2*PI)/3)"  
+
+variable      s3 equal "((v_I1)/3)+(2/3)*(sqrt((v_I1)^2-(3*(v_I2))))*cos((v_A)+(4*PI)/3)" 
+
+write_data	MMC.dat
+write_restart	MMC.rest
+
+reset_timestep	0
+
+dump      1 all custom 100 2_percent_sio2_kim.lammpstrj id type x y z 
+dump      2 all cfg 100 dump.compression_mmc*.cfg mass type xs ys zs c_csym c_peratom 
+dump      3 all custom 100 compression_peratom* id type xs ys zs c_1[1] c_1[2] c_1[3] c_1[4] c_1[5] c_1[6] 
+
+log      NVTlog5050_compress_mmc.data 
+
+# tensile deformation
+fix      2 all deform 1 y erate 0.02 units box remap x
+#erate-  constant engineering strain rate
+
+# temperature controller
+fix      1 all nvt temp 300 300 0.01 
+fix    def all print 1 "${strain} ${p2} ${s1} ${s2} ${s3} ${fm} ${fv} ${t} ${fd}" file 2_percent_sio2_kim.txt title "strain p2 s1 s2 s3 fm fv t fd"
+run      30000
