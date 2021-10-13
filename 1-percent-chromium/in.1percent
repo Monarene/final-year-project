@@ -245,10 +245,10 @@ set    region RHA36 type/fraction 3 0.5 12358
 
 #creating atoms for chromium with group 31
 create_atoms      4 region RHA37 units box
-group    clu31 region RHA37
+group    clu30 region RHA37
 
 create_atoms      4 region RHA38 units box
-group    clu31 region RHA38
+group    clu30 region RHA38
 
 kim interactions Al Si C Cr
 mass 1 26.98
