@@ -54,6 +54,7 @@ region     RHA36 sphere 42 90 42 ${radius} units box
 region     RHA37 sphere 8 44 3 ${radius} units box
 region     RHA38 sphere 8 54 10 ${radius} units box
 region     RHA39 sphere 42 75 25 ${radius} units box
+region     RHA40 sphere 25 75 8 ${radius} units box
 
 # deleting atoms for Silicon Carbide
 delete_atoms    region RHA1
@@ -97,6 +98,7 @@ delete_atoms    region RHA36
 delete_atoms    region RHA37
 delete_atoms    region RHA38
 delete_atoms    region RHA39
+delete_atoms    region RHA40
 
 #New Lattice for RHA
 lattice         diamond 5.4
@@ -255,6 +257,9 @@ group    clu30 region RHA38
 create_atoms      4 region RHA39 units box
 group    clu30 region RHA39
 
+create_atoms      4 region RHA40 units box
+group    clu30 region RHA40
+
 kim interactions Al Si C Cr
 mass 1 26.98
 mass 2 28.09
@@ -317,7 +322,7 @@ write_restart	MMC.rest
 
 reset_timestep	0
 
-dump      1 all custom 100 tension_2_percent_chromium.lammpstrj id type x y z 
+dump      1 all custom 100 tension_3_percent_chromium.lammpstrj id type x y z 
 dump      2 all cfg 100 dump.compress_mmc*.cfg mass type xs ys zs c_csym c_peratom 
 dump      3 all custom 100 stress_peratom* id type xs ys zs c_1[1] c_1[2] c_1[3] c_1[4] c_1[5] c_1[6] 
 
@@ -325,7 +330,7 @@ log      NVTlog5050_compress_mmc.data
 
 # temperature controller
 fix      1 all nvt temp 300 300 0.1
-fix    def all print 1 "${strain} ${p2} ${s1} ${s2} ${s3} ${fm} ${fv} ${t} ${fd}" file mmc_tension_2_percent_chromium.txt title "strain p2 s1 s2 s3 fm fv t fd"
+fix    def all print 1 "${strain} ${p2} ${s1} ${s2} ${s3} ${fm} ${fv} ${t} ${fd}" file mmc_tension_3_percent_chromium.txt title "strain p2 s1 s2 s3 fm fv t fd"
 
 # tensile deformation
 fix      2 all deform 1 y erate 0.02 units box remap x
