@@ -234,6 +234,9 @@ set    region RHA36 type/fraction 3 0.66 12358
 
 set    type 3 type/fraction 4 0.50 12358
 
+# new lattice here 
+
+
 pair_style    hybrid vashishta meam/c eam/alloy #coul/streitz 12.0 wolf 0.31 eam/fs tersoff 
 #pair_coeff    * * tersoff SiO.tersoff NULL Si O O
 pair_coeff    * * eam/alloy AlO.eam.alloy Al NULL O O
