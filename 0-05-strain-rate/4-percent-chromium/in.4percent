@@ -343,7 +343,7 @@ fix      1 all nvt temp 300 300 0.1
 fix    def all print 1 "${strain} ${p2} ${s1} ${s2} ${s3} ${fm} ${fv} ${t} ${fd}" file mmc_tension_4_percent_chromium_005_strain_rate.txt title "strain p2 s1 s2 s3 fm fv t fd"
 
 # tensile deformation
-fix      2 all deform 1 y erate 0.01 units box remap x
+fix      2 all deform 1 y erate 0.05 units box remap x
 #erate-  constant engineering strain rate
 
 run      30000
