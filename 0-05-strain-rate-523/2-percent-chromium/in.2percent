@@ -274,8 +274,8 @@ compute	   1 all stress/atom NULL
 # EQUILIBRATION
 reset_timestep 0
 timestep	0.001 			# 0.001 picoseconds = 10^-12 seconds = 1 femtosecond
-velocity    all create 300 873847 rot yes mom yes dist gaussian
-fix	   1 all npt temp 300 300 $(100.0*dt) iso 0 0 1
+velocity    all create 523 873847 rot yes mom yes dist gaussian
+fix	   1 all npt temp 523 523 $(100.0*dt) iso 0 0 1
 
 #Set thermo output
 thermo     100
@@ -324,7 +324,7 @@ dump      3 all custom 100 stress_peratom* id type xs ys zs c_1[1] c_1[2] c_1[3]
 log      NVTlog5050_compress_mmc.data 
 
 # temperature controller
-fix      1 all nvt temp 300 300 0.1
+fix      1 all nvt temp 523 523 0.1
 fix    def all print 1 "${strain} ${p2} ${s1} ${s2} ${s3} ${fm} ${fv} ${t} ${fd}" file mmc_tension_2_percent_chromium_005_strain_rate.txt title "strain p2 s1 s2 s3 fm fv t fd"
 
 # tensile deformation
